@@ -95,8 +95,58 @@ Route::get( '/', function () {
     //     } )
     //     ->get();
 
-    $result = DB::table('users')
-        ->where('meta->settings->site_background', 'black')
+    // $result = DB::table('users')
+    //     ->where('meta->settings->site_background', 'black')
+    //     ->get();
+
+    // $result = DB::table('comments')->paginate(5);
+    
+    // $result = DB::table('comments')
+    //     ->where('content', 'like', '%satt%')
+    //     ->get();
+
+    // $result = DB::table('comments')
+    //     ->where('content', 'like', '%Id%')
+    //     ->get();
+    
+    // $result = DB::table('comments')
+    //     ->orderBy('id', 'DESC')
+    //     ->get();
+
+    // $result = DB::table('users')
+    //     ->orderBy('name', 'DESC')
+    //     ->get();
+
+    // $result = DB::table('comments')
+    //     ->selectRaw('count(id) as number_of_5stars_comments, rating')
+    //     ->groupBy('rating')
+    //     ->having('rating', '=', 5)
+    //     ->get();
+
+    // $result = DB::table('comments')
+    //     ->skip(5)
+    //     ->take(5)
+    //     ->get();
+
+    // $result = DB::table('comments')
+    //     ->offset(5)
+    //     ->limit(5)
+    //     ->get();
+
+    // $room_id = 1;
+    // $result = DB::table('reservations')
+    //     ->when($room_id, function($query, $room_id) {
+    //         return $query->where('room_id', $room_id);
+    //     })
+    //     ->get();
+
+    $sortBy = null;
+    $result = DB::table('rooms')
+        ->when($sortBy, function ($query, $sortBy) {
+            return $query->orderBy($sortBy);
+        }, function ($query) {
+            return $query->orderBy('price');
+        })
         ->get();
 
     dump( $result );

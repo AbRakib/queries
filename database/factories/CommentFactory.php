@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comment>
  */
-class CommentFactory extends Factory
-{
+class CommentFactory extends Factory {
     /**
      * Define the model's default state.
      *
@@ -17,8 +16,9 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         return [
-            'content' => fake()->text(500),
-            'user_id' => fake()->numberBetween(1,3),
+            'content' => fake()->text( 500 ),
+            'user_id' => fake()->numberBetween( 1, 3 ),
+            'rating'  => fake()->numberBetween( 1, 5 ),
         ];
     }
 }
