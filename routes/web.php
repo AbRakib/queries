@@ -140,15 +140,33 @@ Route::get( '/', function () {
     //     })
     //     ->get();
 
-    $sortBy = null;
-    $result = DB::table('rooms')
-        ->when($sortBy, function ($query, $sortBy) {
-            return $query->orderBy($sortBy);
-        }, function ($query) {
-            return $query->orderBy('price');
-        })
-        ->get();
+    // $sortBy = null;
+    // $result = DB::table('rooms')
+    //     ->when($sortBy, function ($query, $sortBy) {
+    //         return $query->orderBy($sortBy);
+    //     }, function ($query) {
+    //         return $query->orderBy('price');
+    //     })
+    //     ->get();
 
+    // $result = DB::table('comments')->orderBy('id')->chunk(10, function ($comments) {
+    //     foreach($comments as $comment) {
+    //         if($comment->id == 10) return false;
+    //     }
+    // });
+
+    // $result = DB::table('comments')->orderBy('id')->chunkById(5, function($comments){
+    //     foreach ($comments as $comment) {
+    //         DB::table('comments')->where('id', $comment->id)->update(['rating' => null]);
+    //     }
+    // });
+
+    $result = DB::table('reservations')
+        ->join('rooms', 'reservations.room_id', '=', 'rooms.id')
+        ->join('users', 'reservations.user_id', '=', 'users.id')
+        ->where('rooms.id', '>', 3)
+        ->where('users.id', '>', 1)
+        ->get();
     dump( $result );
     return view( 'welcome' );
 } );
