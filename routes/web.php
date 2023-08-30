@@ -85,14 +85,18 @@ Route::get( '/', function () {
     //     ['updated_at', '=', 'created_at'],
     // ]);
 
-    $result = DB::table( 'users' )
-        ->whereExists( function ( $query ) {
-            $query->select( 'id' )
-                ->from( 'reservations' )
-                ->whereRaw( 'reservations.user_id = users.id' )
-                ->whereDate( 'created_at', '=', '2023-08-30' )
-                ->limit( 1 );
-        } )
+    // $result = DB::table( 'users' )
+    //     ->whereExists( function ( $query ) {
+    //         $query->select( 'id' )
+    //             ->from( 'reservations' )
+    //             ->whereRaw( 'reservations.user_id = users.id' )
+    //             ->whereDate( 'created_at', '=', '2023-08-30' )
+    //             ->limit( 1 );
+    //     } )
+    //     ->get();
+
+    $result = DB::table('users')
+        ->where('meta->settings->site_background', 'black')
         ->get();
 
     dump( $result );
