@@ -323,8 +323,28 @@ Route::get( '/', function () {
     
     // dump($comments);
 
-    $result = Comment::all();
-    dump($result);
+    // $result = Comment::all();
+    // $result = Comment::all()->toArray(); // give us data array format
+    // $result = Comment::all()->count(); // count total column 
+    // $result = Comment::all()->toJson();
+    // $comments = Comment::all();
+    // $result = $comments->reject(function ($comment) {
+    //    return $comment->rating < 3; 
+    // }); 
+    // $result = $comments->map(function ($comment) {
+    //     return $comment->content;
+    // }); 
+    // $result = $comments->diff($result);
+    // dump($result);
+
+        // $comment = Comment::find(1);
+        // $comment->rating = 100;
+        // $comment->save();
+
+        // $result = Comment::where('id', 1)->get()->toJson();
+        // return ($result);
+    
+    
 
     return view( 'welcome' );
 } );

@@ -2,16 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
-{
+class Comment extends Model {
     use HasFactory;
-    protected static function booted() {
-        static::addGlobalScope('rating', function (Builder $builder) {
-            $builder->where('rating', '>', 2);
-        }); 
-    }
+    // protected static function booted() {
+    //     static::addGlobalScope('rating', function (Builder $builder) {
+    //         $builder->where('rating', '>', 2);
+    //     });
+    // }
+
+    // // when start query before added value 10 with result value
+    // public function getRatingAttribute($value) {
+    //     return $value + 10;
+    // }
+
+    // // when start query after added value 1 with result value
+    // public function setRatingAttribute( $value ) {
+    //     $this->attributes['rating'] = $value + 1;
+    // }
 }
