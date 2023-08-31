@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Comment;
+use App\Models\Reservation;
+use App\Models\Room;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -258,12 +262,69 @@ Route::get( '/', function () {
     // DB::table('rooms')->truncate();
     // DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
-    $result = DB::table('rooms')
-        // ->sharedLock()
-        ->where('room_size', 3)
-        ->lockForUpdate()
-        ->get()
-        ->dump();
+    // $result = DB::table('rooms')
+    //     // ->sharedLock()
+    //     ->where('room_size', 3)
+    //     ->lockForUpdate()
+    //     ->get()
+    //     ->dump();
+
+    // $result = Room::where('id', 1)->get();
+    //     dump($result);
+
+    // $result = User::select('name', 'email');
+    // $result = User::select('name', 'email')
+    //         ->addSelect(['worst_rating' => Comment::select('rating')
+    //             ->whereColumn('user_id', 'users.id')
+    //             ->orderBy('rating', 'asc')
+    //             ->limit(1)
+    //         ])
+    //         ->get()->toArray();
+
+    // $result = User::orderByDesc(
+    //     Reservation::select('check_in')
+    //         ->whereColumn('user_id', 'users.id')
+    //         ->orderBy('check_in', 'desc')
+    //         ->limit(1)
+    // )->select('id', 'name')->get()->toArray();
+
+    // $result = Reservation::chunk(2, function ($reservation) {
+    //     foreach ($reservation as $item)  {
+    //         echo $item->id;
+    //     }
+    // });
+
+    // foreach (Room::cursor() as $reservation) {
+    //     echo $reservation->id;
+    // }
+
+    //$result = User::find(1); // [1,2,3] using for get single data
+    // $result = User::where('email', 'like', '%@%')->first();
+    // $result = User::where('email', 'like', '%@email.com')->firstOr(function () {
+    //     User::where('id', 1)->update(['email' => 'alexandrine86@example.net']);
+    // });
+    // $users = DB::table('users')->get();
+
+    
+    // $userDB = DB::table('users')->where('id', 1)->get();
+    // $userModel = User::findOrFail(1);
+
+    // dump($userModel);
+    // dump($userDB);
+
+    // $result = Comment::sum('content'); // count max min avg sum
+    // $comments = DB::table('comments')->select('rating')->get();
+    // dump($comments);
+    
+    // dump($result);
+
+    // $comments = Comment::all();
+    // $comments =Comment::withoutGlobalScope('rating')->get();
+    
+    // dump($comments);
+
+    $result = Comment::all();
+    dump($result);
 
     return view( 'welcome' );
 } );
