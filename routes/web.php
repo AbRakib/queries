@@ -100,7 +100,7 @@ Route::get( '/', function () {
     //     ->get();
 
     // $result = DB::table('comments')->paginate(5);
-    
+
     // $result = DB::table('comments')
     //     ->where('content', 'like', '%satt%')
     //     ->get();
@@ -108,7 +108,7 @@ Route::get( '/', function () {
     // $result = DB::table('comments')
     //     ->where('content', 'like', '%Id%')
     //     ->get();
-    
+
     // $result = DB::table('comments')
     //     ->orderBy('id', 'DESC')
     //     ->get();
@@ -161,12 +161,102 @@ Route::get( '/', function () {
     //     }
     // });
 
-    $result = DB::table('reservations')
-        ->join('rooms', 'reservations.room_id', '=', 'rooms.id')
-        ->join('users', 'reservations.user_id', '=', 'users.id')
-        ->where('rooms.id', '>', 3)
-        ->where('users.id', '>', 1)
-        ->get();
-    dump( $result );
+    // $result = DB::table('reservations')
+    //     ->join('rooms', 'reservations.room_id', '=', 'rooms.id')
+    //     ->join('users', 'reservations.user_id', '=', 'users.id')
+    //     ->where('rooms.id', '>', 3)
+    //     ->where('users.id', '>', 1)
+    //     ->get();
+
+    // $result = DB::table('reservations')
+    //         ->join('rooms', function ($join) {
+    //             $join->on('reservations.room_id', '=', 'rooms.id')->where('rooms.id', '>', 3);
+    //         })
+    //         ->join('users', function ($join) {
+    //             $join->on('reservations.user_id', '=', 'users.id')->where('users.id', '>', 3);
+    //         })
+    //         ->get();
+
+    // $rooms = DB::table('rooms')->where('id', '>', 3);
+    // $users = DB::table('users')->where('id', '>', 1);
+    // $result = DB::table('reservations')
+    //         ->joinSub($rooms, 'rooms', function($join) {
+    //             $join->on('reservations.room_id', '=', 'rooms.id');
+    //         })
+    //         ->joinSub($users, 'users', function ($join) {
+    //             $join->on('reservations.user_id', '=', 'users.id');
+    //         })
+    //         ->get();
+
+    // $result = DB::table( 'rooms' )
+    //     ->leftJoin( 'reservations', 'rooms.id', '=', 'reservations.room_id' )
+    //     ->leftJoin('cities', 'reservations.city_id', '=', 'cities.id')
+    //     ->selectRaw( 'room_size, cities.name, count(reservations.id) as reservations_count' )
+    //     ->groupBy( 'room_size', 'price', 'cities.name' )
+    //     ->orderByRaw( 'count(reservations.id) DESC' )
+    //     ->get();
+
+    // $result = DB::table('rooms')
+    //     ->crossJoin('cities')
+    //     ->get();
+
+    // $users = DB::table('users')
+    //     ->select('name');
+
+    // $result = DB::table('cities')
+    //     ->select('name')
+    //     ->union($users)
+    //     ->get();
+
+    // $comments = DB::table('comments')
+    //     ->select('rating as rating_or_room_id', 'id', DB::raw('"comments" as type_of_activity'))
+    //     ->where('user_id', 2);
+
+    // $result = DB::table('reservations')
+    //     ->select('room_id as rating_or_room_id', 'id', DB::raw('"reservation" as type_of_activity'))
+    //     ->union($comments)
+    //     ->where('user_id', 2)
+    //     ->get();
+
+    // $result = DB::table('rooms')
+    //     ->insert([
+    //         ['room_number' => 1, 'room_size' => 1, 'price' => 1, 'description' => 'new description 1'],
+    //         ['room_number' => 2, 'room_size' => 2, 'price' => 2, 'description' => 'new description 2']
+    //     ]);
+    // $id = DB::table('rooms')->insertGetId(
+    //     ['room_number' => 3, 'room_size' => 3, 'price' => 3, 'description' => 'new description 3'],
+    // );
+    // $result = DB::table('rooms')->get();
+    // dump( $id );
+
+    //  $affected = DB::table('rooms')
+    //     ->where('id', 11)
+    //     ->update(['price' => '2000']);
+
+    // $affected = DB::table('users')
+    //     ->where('id', 1)
+    //     ->update(['meta->settings->site_language' => 'es']);
+    // dump($affected);
+    
+    // $affected = DB::table('rooms')
+    //     ->decrement('price', 10, ['description' => 'new description']);
+
+    // $result = DB::table('rooms')
+    //     ->get();
+    // dump($affected, $result);
+
+    // DB::table('rooms')->where('id', 1)->delete();
+    // DB::table('rooms')->delete();
+    DB::table('rooms')
+        ->insert([
+            ['room_number' => 1, 'room_size' => 1, 'price' => 1, 'description' => 'new description 1'],
+            ['room_number' => 2, 'room_size' => 2, 'price' => 2, 'description' => 'new description 2'],
+            ['room_number' => 3, 'room_size' => 3, 'price' => 3, 'description' => 'new description 3'],
+        ]);
+
+    DB::statement('SET FOREIGN_KEY_CHECKS=0');
+    DB::table('rooms')->truncate();
+    DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
     return view( 'welcome' );
 } );
