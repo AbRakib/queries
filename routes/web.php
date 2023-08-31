@@ -247,16 +247,23 @@ Route::get( '/', function () {
 
     // DB::table('rooms')->where('id', 1)->delete();
     // DB::table('rooms')->delete();
-    DB::table('rooms')
-        ->insert([
-            ['room_number' => 1, 'room_size' => 1, 'price' => 1, 'description' => 'new description 1'],
-            ['room_number' => 2, 'room_size' => 2, 'price' => 2, 'description' => 'new description 2'],
-            ['room_number' => 3, 'room_size' => 3, 'price' => 3, 'description' => 'new description 3'],
-        ]);
+    // DB::table('rooms')
+    //     ->insert([
+    //         ['room_number' => 1, 'room_size' => 1, 'price' => 1, 'description' => 'new description 1'],
+    //         ['room_number' => 2, 'room_size' => 2, 'price' => 2, 'description' => 'new description 2'],
+    //         ['room_number' => 3, 'room_size' => 3, 'price' => 3, 'description' => 'new description 3'],
+    //     ]);
 
-    DB::statement('SET FOREIGN_KEY_CHECKS=0');
-    DB::table('rooms')->truncate();
-    DB::statement('SET FOREIGN_KEY_CHECKS=1');
+    // DB::statement('SET FOREIGN_KEY_CHECKS=0');
+    // DB::table('rooms')->truncate();
+    // DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
+    $result = DB::table('rooms')
+        // ->sharedLock()
+        ->where('room_size', 3)
+        ->lockForUpdate()
+        ->get()
+        ->dump();
 
     return view( 'welcome' );
 } );
