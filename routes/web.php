@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Address;
+use App\Models\City;
 use App\Models\Comment;
 use App\Models\Reservation;
 use App\Models\Room;
@@ -330,7 +331,7 @@ Route::get( '/', function () {
     // $result = Comment::all()->toJson();
     // $comments = Comment::all();
     // $result = $comments->reject(function ($comment) {
-    //    return $comment->rating < 3; 
+    //    return $comment->rating <br 3; 
     // }); 
     // $result = $comments->map(function ($comment) {
     //     return $comment->content;
@@ -349,8 +350,33 @@ Route::get( '/', function () {
     // $result = Address::all();
     // $result = DB::table('addresses')->get();
 
-    $user = User::find(1);
-    dump($user->address->street);
+    // $user = User::findOrFail(3);
+    // return $user;
+    // $address = Address::findOrFail(2);
+    // return $address;
+    // dump($address->user->name);
+
+    // $user = User::find(2);
+    // $results = $user->comments;
+
+    // foreach ($results as $result) {
+    //     dump($result->content);
+    // }
+
+    // $city = City::find(1);
+    // dump($city->rooms);
+
+    // $result = Room::where('room_size', 2)->get();
+    // foreach ($result as $rooms) {
+    //     foreach ($rooms->cities as $city) {
+    //         // echo $city->name . '<br>';
+    //         dump($city->pivot->room_id);
+    //         dump($city->pivot->created_at);
+    //     }
+    // }
+
+    $result = Comment::find(1);
+    dump($result->user->address->country);
 
     return view( 'welcome' );
 } );

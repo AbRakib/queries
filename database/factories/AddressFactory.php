@@ -19,6 +19,7 @@ class AddressFactory extends Factory {
             'number'  => fake()->numberBetween( 1, 10 ),
             'street'  => fake()->streetName(),
             'user_id' => fake()->unique()->numberBetween( 1, 3 ),
+            'country' => fake()->country(),
         ];
     }
 }
