@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Address;
 use App\Models\Comment;
 use App\Models\Reservation;
 use App\Models\Room;
@@ -337,14 +338,19 @@ Route::get( '/', function () {
     // $result = $comments->diff($result);
     // dump($result);
 
-        // $comment = Comment::find(1);
-        // $comment->rating = 100;
-        // $comment->save();
+    // $comment = Comment::find(1);
+    // $comment->rating = 100;
+    // $comment->save();
 
-        // $result = Comment::where('id', 1)->get()->toJson();
-        // return ($result);
+    // $result = Comment::where('id', 1)->get()->toJson();
+    // return ($result);
     
-    
+    // $result = Address::all()->toArray();
+    // $result = Address::all();
+    // $result = DB::table('addresses')->get();
+
+    $user = User::find(1);
+    dump($user->address->street);
 
     return view( 'welcome' );
 } );

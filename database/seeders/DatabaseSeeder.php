@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Address;
 use App\Models\Comment;
 use Illuminate\Database\Seeder;
 
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RoomSeeder::class);
         $this->call(CitySeeder::class);
         $this->call(ReservationSeeder::class);
+        $this->call(AddressSeeder::class);
         
     }
 }
