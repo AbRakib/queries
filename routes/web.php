@@ -3,6 +3,8 @@
 use App\Models\Address;
 use App\Models\City;
 use App\Models\Comment;
+use App\Models\Company;
+use App\Models\Image;
 use App\Models\Reservation;
 use App\Models\Room;
 use App\Models\User;
@@ -375,8 +377,15 @@ Route::get( '/', function () {
     //     }
     // }
 
-    $result = Comment::find(1);
-    dump($result->user->address->country);
+    // $result = Comment::find(1);
+    // dump($result->user->address->country);
 
+    // $result = Company::find(2);
+    // dump($result->reservation);
+    
+    // $result = User::find(3);
+    $result = Image::find(7);
+
+    dump($result->imageable);
     return view( 'welcome' );
 } );
