@@ -1,14 +1,7 @@
 <?php
 
-use App\Models\Address;
-use App\Models\City;
 use App\Models\Comment;
-use App\Models\Company;
-use App\Models\Image;
-use App\Models\Reservation;
-use App\Models\Room;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -245,7 +238,7 @@ Route::get( '/', function () {
     //     ->where('id', 1)
     //     ->update(['meta->settings->site_language' => 'es']);
     // dump($affected);
-    
+
     // $affected = DB::table('rooms')
     //     ->decrement('price', 10, ['description' => 'new description']);
 
@@ -309,7 +302,6 @@ Route::get( '/', function () {
     // });
     // $users = DB::table('users')->get();
 
-    
     // $userDB = DB::table('users')->where('id', 1)->get();
     // $userModel = User::findOrFail(1);
 
@@ -319,25 +311,25 @@ Route::get( '/', function () {
     // $result = Comment::sum('content'); // count max min avg sum
     // $comments = DB::table('comments')->select('rating')->get();
     // dump($comments);
-    
+
     // dump($result);
 
     // $comments = Comment::all();
     // $comments =Comment::withoutGlobalScope('rating')->get();
-    
+
     // dump($comments);
 
     // $result = Comment::all();
     // $result = Comment::all()->toArray(); // give us data array format
-    // $result = Comment::all()->count(); // count total column 
+    // $result = Comment::all()->count(); // count total column
     // $result = Comment::all()->toJson();
     // $comments = Comment::all();
     // $result = $comments->reject(function ($comment) {
-    //    return $comment->rating <br 3; 
-    // }); 
+    //    return $comment->rating <br 3;
+    // });
     // $result = $comments->map(function ($comment) {
     //     return $comment->content;
-    // }); 
+    // });
     // $result = $comments->diff($result);
     // dump($result);
 
@@ -347,7 +339,7 @@ Route::get( '/', function () {
 
     // $result = Comment::where('id', 1)->get()->toJson();
     // return ($result);
-    
+
     // $result = Address::all()->toArray();
     // $result = Address::all();
     // $result = DB::table('addresses')->get();
@@ -382,7 +374,7 @@ Route::get( '/', function () {
 
     // $result = Company::find(2);
     // dump($result->reservation);
-    
+
     // $result = User::find(3);
     // $result = Image::find(7);
     // dump($result->imageable);
@@ -415,9 +407,26 @@ Route::get( '/', function () {
     //         ['number' => '1', 'street' => 'Dhaka', 'country' => 'Bangladesh', 'user_id' => '2']
     //     );
     // dump($id);
-    
 
     // $result = DB::table('users')->where('id', '>', 1)->get()->dump();
+
+    // $result = User::find(1);
+    // dump($result->likedImages, $result->likeRooms);
+
+    // $result = User::find( 1 )->comments()
+    //     ->where( 'rating', '>', 3 )
+    //     ->orWhere( 'rating', '<', 2 )
+    //     ->get();
+
+    // $result = User::find(1)->comments()->where(function ($query) {
+    //     return $query->where('rating', '>', 3)->orWhere('rating', '<', 2);
+    // })->get();
+
+    // $result = User::has('comments')->get();
+    // $result = Comment::has('user.address')->get();
+    $result = User::withCount('comments')->get();
+
+    dump( $result );
 
     return view( 'welcome' );
 } );

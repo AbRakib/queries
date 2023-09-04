@@ -55,11 +55,11 @@ class User extends Authenticatable {
         return $this->morphOne( 'App\Models\Image', 'imageable' );
     }
 
-    public function likeImages() {
-        return $this->morphedByMany( 'App\Models\Room', 'likeable' );
+    public function likedImages() {
+        return $this->morphedByMany( 'App\Models\Image', 'likeable' );
     }
-    
-    public function likeRooms() {
+
+    public function likedRooms() {
         return $this->morphedByMany( 'App\Models\Room', 'likeable' );
     }
 
