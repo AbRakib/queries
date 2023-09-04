@@ -19,6 +19,8 @@ class CommentFactory extends Factory {
             'content' => fake()->text( 500 ),
             'user_id' => fake()->numberBetween( 1, 3 ),
             'rating'  => fake()->numberBetween( 1, 5 ),
+            'commentable_type' => fake()->randomElement(['App\Models\Room', 'App\Models\Image']),
+            'commentable_id' => fake()->numberBetween(1, 10),
         ];
     }
 }

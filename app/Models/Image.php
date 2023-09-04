@@ -12,4 +12,9 @@ class Image extends Model
     public function imageable() {
         return $this->morphTo();
     }
+
+    public function likes()
+    {
+        return $this->morphToMany('App\Models\User', 'likeable');
+    }
 }

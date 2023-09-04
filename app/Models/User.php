@@ -8,8 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -40,19 +39,28 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-        'meta'  => 'json'
+        'password'          => 'hashed',
+        'meta'              => 'json',
     ];
 
     public function address() {
-        return $this->hasOne(Address::class, 'user_id', 'id');
+        return $this->hasOne( Address::class, 'user_id', 'id' );
     }
 
     public function comments() {
-        return $this->hasMany(Comment::class, 'user_id', 'id');
+        return $this->hasMany( Comment::class, 'user_id', 'id' );
     }
 
     public function image() {
-        return $this->morphOne('App\Models\Image', 'imageable');
+        return $this->morphOne( 'App\Models\Image', 'imageable' );
     }
+
+    public function likeImages() {
+        return $this->morphedByMany( 'App\Models\Room', 'likeable' );
+    }
+    
+    public function likeRooms() {
+        return $this->morphedByMany( 'App\Models\Room', 'likeable' );
+    }
+
 }

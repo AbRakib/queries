@@ -30,4 +30,8 @@ class Comment extends Model {
     public function country() {
         return $this->hasOneThrough(Address::class, User::class, 'user_id', 'user_id', 'id')->select('country as name');
     }
+
+    public function commentable() {
+        return $this->morphTo();
+    }
 }

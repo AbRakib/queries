@@ -384,8 +384,40 @@ Route::get( '/', function () {
     // dump($result->reservation);
     
     // $result = User::find(3);
-    $result = Image::find(7);
+    // $result = Image::find(7);
+    // dump($result->imageable);
 
-    dump($result->imageable);
+    // $result = DB::table('users')->distinct()->get();
+    // $result = DB::table('users')->select('name');
+    // $users = $result->addSelect('email')->get();
+    // dump($users);
+
+    // $result = DB::table('users')
+    //     ->join('addresses', 'users.id', '=', 'addresses.user_id') // join query
+    //     ->get();
+
+    // $result = DB::table('users')
+    //     ->leftJoin('addresses', 'users.id', '=', 'addresses.user_id')
+    //     ->get()
+    //     ->toArray();
+
+    // $result = DB::table('users')
+    //     ->join('addresses', 'users.id', '=', 'addresses.user_id')
+    //     ->get()
+    //     ->toArray();
+
+    // $result = DB::table('users')
+    //     ->crossJoin('rooms')
+    //     ->get();
+
+    // $id = DB::table('addresses')
+    //     ->insertGetId(
+    //         ['number' => '1', 'street' => 'Dhaka', 'country' => 'Bangladesh', 'user_id' => '2']
+    //     );
+    // dump($id);
+    
+
+    // $result = DB::table('users')->where('id', '>', 1)->get()->dump();
+
     return view( 'welcome' );
 } );
